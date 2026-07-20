@@ -1,25 +1,11 @@
-name: family_os
-description: A clean Flutter starter app for family organisation.
-publish_to: "none"
-version: 0.1.0+1
+# GitHub-Upload-Checkliste
 
-environment:
-  sdk: ">=3.10.0 <4.0.0"
-  flutter: ">=3.38.0"
-
-dependencies:
-  flutter:
-    sdk: flutter
-  flutter_localizations:
-    sdk: flutter
-  flutter_riverpod: ^3.3.2
-  go_router: ^17.3.0
-  intl: ^0.20.2
-
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  flutter_lints: ^6.0.0
-
-flutter:
-  uses-material-design: true
+- [ ] ZIP entpackt
+- [ ] Inhalt von `FamilyOS_Starter` in `Rapha8306/Raphas_Way` kopiert
+- [ ] Ordner `.github/workflows` vorhanden
+- [ ] Änderungen auf Branch `main` gespeichert
+- [ ] Settings → Pages → Source: GitHub Actions
+- [ ] Workflow erfolgreich
+- [ ] App unter `https://rapha8306.github.io/Raphas_Way/` geöffnet
+- [ ] Installation auf Smartphone getestet
+- [ ] Offline-Verhalten nach erstem vollständigem Laden getestet

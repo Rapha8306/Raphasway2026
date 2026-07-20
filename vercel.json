@@ -1,20 +1,29 @@
 {
-  "cleanUrls": true,
-  "headers": [
-    {
-      "source": "/service-worker.js",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "no-cache"
-        }
-      ]
-    }
+  "project": "FamilyOS",
+  "version": "0.2.0",
+  "generated_files": 24,
+  "modules": [
+    "dashboard",
+    "tasks",
+    "calendar",
+    "family",
+    "assistant"
   ],
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ]
+  "status": "installable-pwa-starter",
+  "pwa": {
+    "installable": true,
+    "offline_fallback": true,
+    "service_worker": "custom",
+    "hosting_configs": [
+      "netlify",
+      "vercel"
+    ]
+  },
+  "github_pages": {
+    "owner": "Rapha8306",
+    "repository": "Raphas_Way",
+    "base_path": "/Raphas_Way/",
+    "expected_url": "https://rapha8306.github.io/Raphas_Way/",
+    "deployment": "GitHub Actions"
+  }
 }

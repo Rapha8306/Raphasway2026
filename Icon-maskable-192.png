@@ -1,97 +1,25 @@
-import 'package:flutter/material.dart';
-
-class AssistantScreen extends StatefulWidget {
-  const AssistantScreen({super.key});
-
-  @override
-  State<AssistantScreen> createState() => _AssistantScreenState();
-}
-
-class _AssistantScreenState extends State<AssistantScreen> {
-  final controller = TextEditingController();
-  final messages = <({bool user, String text})>[
-    (
-      user: false,
-      text: 'Hallo, ich bin Olivia. Ich helfe dir beim Planen und Organisieren. '
-          'In dieser Starter-Version arbeite ich noch ohne externe KI-Verbindung.',
-    ),
-  ];
-
-  void send() {
-    final value = controller.text.trim();
-    if (value.isEmpty) return;
-
-    setState(() {
-      messages.add((user: true, text: value));
-      messages.add((
-        user: false,
-        text: 'Danke. Diese Demo speichert deine Nachricht nicht. '
-            'Für eine echte Antwort muss später ein geschütztes KI-Backend angebunden werden.',
-      ));
-    });
-    controller.clear();
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Olivia')),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.all(16),
-              itemCount: messages.length,
-              itemBuilder: (context, index) {
-                final message = messages[index];
-                return Align(
-                  alignment: message.user ? Alignment.centerRight : Alignment.centerLeft,
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 560),
-                    child: Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(14),
-                        child: Text(message.text),
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-          SafeArea(
-            top: false,
-            child: Padding(
-              padding: const EdgeInsets.all(12),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: controller,
-                      onSubmitted: (_) => send(),
-                      decoration: const InputDecoration(
-                        hintText: 'Frage Olivia …',
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  IconButton.filled(
-                    onPressed: send,
-                    icon: const Icon(Icons.send),
-                    tooltip: 'Senden',
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2F6B5F">
+  <title>FamilyOS – Offline</title>
+  <style>
+    body { margin:0; min-height:100vh; display:grid; place-items:center;
+      font-family:system-ui,sans-serif; background:#f7f8f7; color:#173c34; }
+    main { max-width:520px; padding:32px; text-align:center; }
+    img { width:96px; border-radius:26px; }
+    button { border:0; border-radius:999px; padding:12px 20px;
+      background:#2f6b5f; color:white; font-weight:700; cursor:pointer; }
+  </style>
+</head>
+<body>
+  <main>
+    <img src="icons/Icon-192.png" alt="">
+    <h1>Du bist offline</h1>
+    <p>Bereits geladene Bereiche von FamilyOS bleiben verfügbar. Stelle die Internetverbindung wieder her und versuche es erneut.</p>
+    <button onclick="location.reload()">Erneut versuchen</button>
+  </main>
+</body>
+</html>

@@ -1,13 +1,7 @@
-[build]
-command = "flutter build web --release"
-publish = "build/web"
+include: package:flutter_lints/flutter.yaml
 
-[[headers]]
-for = "/service-worker.js"
-[headers.values]
-Cache-Control = "no-cache"
-
-[[redirects]]
-from = "/*"
-to = "/index.html"
-status = 200
+linter:
+  rules:
+    prefer_final_locals: true
+    use_super_parameters: true
+    avoid_print: true
