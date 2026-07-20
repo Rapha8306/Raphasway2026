@@ -1,0 +1,74 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'task_controller.dart';
+
+class TasksScreen extends ConsumerWidget {
+  const TasksScreen({super.key});
+
+  Future<void> _addTask(BuildContext context, WidgetRef ref) async {
+    final controller = TextEditingController();
+    final result = await showDialog<String>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Neue Aufgabe'),
+        content: TextField(
+          controller: controller,
+          autofocus: true,
+          decoration: const InputDecoration(labelText: 'Titel'),
+          onSubmitted: (value) => Navigator.pop(context, value.trim()),
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Abbrechen')),
+          FilledButton(
+            onPressed: () => Navigator.pop(context, controller.text.trim()),
+            child: const Text('Hinzufügen'),
+          ),
+        ],
+      ),
+    );
+    controller.dispose();
+
+    if (result != null && result.isNotEmpty) {
+      ref.read(taskProvider.notifier).add(result, 'Familie');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final tasks = ref.watch(taskProvider);
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('Aufgaben')),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => _addTask(context, ref),
+        icon: const Icon(Icons.add),
+        label: const Text('Aufgabe'),
+      ),
+      body: tasks.isEmpty
+          ? const Center(child: Text('Noch keine Aufgaben vorhanden.'))
+          : ListView.separated(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 96),
+              itemCount: tasks.length,
+              separatorBuilder: (_, __) => const SizedBox(height: 8),
+              itemBuilder: (context, index) {
+                final task = tasks[index];
+                return Card(
+                  child: CheckboxListTile(
+                    value: task.completed,
+                    onChanged: (_) => ref.read(taskProvider.notifier).toggle(task.id),
+                    title: Text(
+                      task.title,
+                      style: task.completed
+                          ? const TextStyle(decoration: TextDecoration.lineThrough)
+                          : null,
+                    ),
+                    subtitle: Text('Zuständig: ${task.assignee}'),
+                    secondary: const Icon(Icons.drag_indicator),
+                  ),
+                );
+              },
+            ),
+    );
+  }
+}

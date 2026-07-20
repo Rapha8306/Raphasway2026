@@ -1,0 +1,41 @@
+import 'package:flutter/material.dart';
+
+class FamilyScreen extends StatelessWidget {
+  const FamilyScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    const members = [
+      ('Raphael', 'Elternteil', Icons.person),
+      ('Partnerin', 'Elternteil', Icons.person_outline),
+      ('Mara', 'Kind', Icons.child_care),
+      ('Ameo', 'Kind', Icons.child_friendly),
+    ];
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('Familie')),
+      body: ListView(
+        padding: const EdgeInsets.all(18),
+        children: [
+          Text('Familienmitglieder', style: Theme.of(context).textTheme.headlineSmall),
+          const SizedBox(height: 14),
+          for (final member in members)
+            Card(
+              child: ListTile(
+                leading: CircleAvatar(child: Icon(member.$3)),
+                title: Text(member.$1),
+                subtitle: Text(member.$2),
+                trailing: const Icon(Icons.chevron_right),
+              ),
+            ),
+          const SizedBox(height: 12),
+          OutlinedButton.icon(
+            onPressed: null,
+            icon: const Icon(Icons.person_add_alt_1),
+            label: const Text('Mitglied hinzufügen – nächster Ausbau'),
+          ),
+        ],
+      ),
+    );
+  }
+}

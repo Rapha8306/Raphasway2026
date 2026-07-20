@@ -1,0 +1,44 @@
+import 'package:flutter/material.dart';
+
+class CalendarScreen extends StatelessWidget {
+  const CalendarScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final events = [
+      ('08:00', 'Arbeit / Schule', Icons.work_outline),
+      ('11:00', 'Logopädie Mara', Icons.record_voice_over_outlined),
+      ('17:30', 'Wocheneinkauf', Icons.shopping_cart_outlined),
+    ];
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('Kalender')),
+      body: ListView(
+        padding: const EdgeInsets.all(18),
+        children: [
+          Text('Montag, 20. Juli', style: Theme.of(context).textTheme.headlineSmall),
+          const SizedBox(height: 18),
+          for (final event in events)
+            Card(
+              child: ListTile(
+                leading: CircleAvatar(child: Icon(event.$3)),
+                title: Text(event.$2),
+                subtitle: Text(event.$1),
+                trailing: const Icon(Icons.chevron_right),
+              ),
+            ),
+          const SizedBox(height: 18),
+          const Card(
+            child: Padding(
+              padding: EdgeInsets.all(18),
+              child: Text(
+                'Nächster Ausbau: echte Monatsansicht, wiederkehrende Termine, '
+                'Kalender-Synchronisation und Erinnerungen.',
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
